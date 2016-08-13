@@ -1,0 +1,22 @@
+{
+  "name": "pixelboard",
+  "version": "1.0.0",
+  "homepage": "https://github.com/jonathanweiss/pixelboard",
+  "authors": [
+    "Jonathan Weiß <bitbucket@jonathanweiss.net>"
+  ],
+  "description": "",
+  "main": "./src/index.js",
+  "moduleType": [
+    "es6"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ]
+}
