@@ -8,7 +8,7 @@ const Led = (props) => {
     });
 
     const style = {
-        backgroundColor: props.isActive ? props.color : false,
+        backgroundColor: props.isActive ? `rgba(${props.color}, 1)` : false,
         width: props.width,
         height: props.height
     };
