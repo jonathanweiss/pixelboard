@@ -24,6 +24,7 @@ const createRandomLeds = (amount) => {
     return leds;
 };
 
+const DIGITS = 2
 const ROWS = 14;
 const COLS = 14;
 
@@ -32,8 +33,11 @@ class App extends React.Component {
     createRandomGrid() {
         const grid = [];
 
-        for (let i = 0; i < ROWS; i++) {
-            grid.push(createRandomLeds(COLS));
+        for (let j = 0; j < DIGITS; j++) {
+            grid[j] = [];
+            for (let i = 0; i < ROWS; i++) {
+                grid[j][i] = createRandomLeds(COLS);
+            }
         }
 
         return grid;
@@ -48,7 +52,7 @@ class App extends React.Component {
     componentDidMount() {
         this.intervalHandle = window.setInterval(() => {
             this.setState({grid: this.createRandomGrid()});
-        }, 5000);
+        }, 50000);
     }
 
     componentWillUnmount() {
@@ -58,13 +62,15 @@ class App extends React.Component {
     render() {
         return (
             <Grid>
-                <Column>
-                    {this.state.grid.map((row, index) => {
-                        return <Row key={`row_${index}`}>{row.map((led, index) => {
-                            return <Led key={`led_${index}`} color={led.color} isActive={led.isActive} />})
-                        }</Row>
-                    })}
-                </Column>
+                {this.state.grid.map((column, index) => {
+                    return <Column key={`column_${index}`}>
+                        {column.map((row, index) => {
+                            return <Row key={`row_${index}`}>{row.map((led, index) => {
+                                return <Led key={`led_${index}`} color={led.color} isActive={led.isActive} />
+                            })}</Row>
+                        })}
+                    </Column>
+                })}
             </Grid>
         );
     }

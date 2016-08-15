@@ -5,7 +5,7 @@ const Grid = (props) => {
 };
 
 Grid.propTypes = {
-    children: React.PropTypes.object,
+    children: React.PropTypes.array,
 };
 
 export default Grid;

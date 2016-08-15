@@ -24,8 +24,8 @@ Led.propTypes = {
 };
 
 Led.defaultProps = {
-    width: 40,
-    height: 40,
+    width: 20,
+    height: 20,
     isActive: false,
 };
 
