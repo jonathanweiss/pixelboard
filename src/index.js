@@ -1,42 +1,63 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import {numbers} from './configuration.js';
+
 import Grid from './components/grid.jsx'
+import Character from './components/character.jsx'
 import Row from './components/row.jsx'
-import Column from './components/column.jsx'
 import Led from './components/led.jsx'
+
+const createRandomLed = () => {
+    const color = [
+        Math.round(Math.random() * 256),
+        Math.round(Math.random() * 256),
+        Math.round(Math.random() * 256)
+    ].join(', ');
+
+    return {
+        isActive: Math.round(Math.random()) === 0,
+        color,
+    }
+};
 
 const createRandomLeds = (amount) => {
     const leds = [];
 
     for (let i = 1; i < amount; i++) {
-        const color = [
-            Math.round(Math.random() * 256),
-            Math.round(Math.random() * 256),
-            Math.round(Math.random() * 256)
-        ].join(', ');
-
-        leds.push({
-            isActive: Math.round(Math.random()) === 0,
-            color,
-        });
+        leds.push(createRandomLed());
     }
+
     return leds;
 };
 
-const DIGITS = 2
+const createRandomGrid = (characters) => {
+    const grid = [];
+
+    for (let i = 0; i < characters; i++) {
+        grid[i] = [];
+        for (let k = 0; k < ROWS; k++) {
+            grid[i][k] = createRandomLeds(COLS);
+        }
+    }
+
+    return grid;
+};
+
+const CHARACTERS = 1;
 const ROWS = 14;
 const COLS = 14;
 
 class App extends React.Component {
 
-    createRandomGrid() {
+    createDigit(digit) {
         const grid = [];
+        const source = numbers[digit];
 
-        for (let j = 0; j < DIGITS; j++) {
-            grid[j] = [];
-            for (let i = 0; i < ROWS; i++) {
-                grid[j][i] = createRandomLeds(COLS);
+        for (let i = 0; i < CHARACTERS; i++) {
+            grid[i] = [];
+            for (let k = 0; k < ROWS; k++) {
+                grid[i][k] = createRandomLeds(COLS);
             }
         }
 
@@ -46,30 +67,21 @@ class App extends React.Component {
     constructor() {
         super();
 
-        this.state = {grid: this.createRandomGrid()};
-    }
-
-    componentDidMount() {
-        this.intervalHandle = window.setInterval(() => {
-            this.setState({grid: this.createRandomGrid()});
-        }, 50000);
-    }
-
-    componentWillUnmount() {
-        window.clearInterval(this.intervalHandle);
+        //this.state = {grid: this.createDigit(1)};
+        this.state = {grid: createRandomGrid(2)};
     }
 
     render() {
         return (
             <Grid>
-                {this.state.grid.map((column, index) => {
-                    return <Column key={`column_${index}`}>
-                        {column.map((row, index) => {
+                {this.state.grid && this.state.grid.map((character, index) => {
+                    return <Character key={`character_${index}`}>
+                        {character.map((row, index) => {
                             return <Row key={`row_${index}`}>{row.map((led, index) => {
                                 return <Led key={`led_${index}`} color={led.color} isActive={led.isActive} />
                             })}</Row>
                         })}
-                    </Column>
+                    </Character>
                 })}
             </Grid>
         );
