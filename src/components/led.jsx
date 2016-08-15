@@ -8,10 +8,13 @@ const Led = (props) => {
     });
 
     const style = {
-        backgroundColor: props.isActive ? `rgba(${props.color}, 1)` : false,
         width: props.width,
         height: props.height
     };
+
+    if (props.isActive) {
+        style.backgroundColor = `rgba(${props.color}, 1)`;
+    }
 
     return <div className={classnames} style={style} />;
 };
@@ -27,6 +30,7 @@ Led.defaultProps = {
     width: 20,
     height: 20,
     isActive: false,
+    color: '0, 0, 0',
 };
 
 export default Led;

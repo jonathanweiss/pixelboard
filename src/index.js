@@ -53,11 +53,13 @@ class App extends React.Component {
     createDigit(digit) {
         const grid = [];
         const source = numbers[digit];
+        let counter = 0;
 
-        for (let i = 0; i < CHARACTERS; i++) {
+        for (let i = 0; i < ROWS; i++) {
             grid[i] = [];
-            for (let k = 0; k < ROWS; k++) {
-                grid[i][k] = createRandomLeds(COLS);
+            for (let k = 0; k < COLS; k++) {
+                grid[i][k] = {isActive: numbers[digit][counter] === 1};
+                counter++;
             }
         }
 
@@ -67,8 +69,8 @@ class App extends React.Component {
     constructor() {
         super();
 
-        //this.state = {grid: this.createDigit(1)};
-        this.state = {grid: createRandomGrid(2)};
+        this.state = {grid: [this.createDigit(1), this.createDigit(2)]};
+        // this.state = {grid: createRandomGrid(2)};
     }
 
     render() {
