@@ -7,52 +7,57 @@ import Led from './components/led.jsx'
 
 import {characters, missingno} from './configuration.js';
 
-const createRandomLed = () => {
-    const color = [
-        Math.round(Math.random() * 256),
-        Math.round(Math.random() * 256),
-        Math.round(Math.random() * 256)
-    ].join(', ');
-
-    return {
-        isActive: Math.round(Math.random()) === 0,
-        color,
-    }
-};
-
-const createRandomLeds = (amount) => {
-    const leds = [];
-
-    for (let i = 1; i < amount; i++) {
-        leds.push(createRandomLed());
-    }
-
-    return leds;
-};
-
-const createRandomGrid = (characters) => {
-    const grid = [];
-
-    for (let i = 0; i < characters; i++) {
-        grid[i] = [];
-        for (let k = 0; k < ROWS; k++) {
-            grid[i][k] = createRandomLeds(COLS);
-        }
-    }
-
-    return grid;
-};
-
 const CHARACTERS = 1;
 const ROWS = 14;
 const COLS = 14;
+const DELAY = 100000;
+const FONT_SIZE = 10;
 
 class App extends React.Component {
+
+    createRandomLed() {
+        const color = [
+            Math.round(Math.random() * 256),
+            Math.round(Math.random() * 256),
+            Math.round(Math.random() * 256)
+        ].join(', ');
+        const { fontSize: width = FONT_SIZE, fontSize: height = FONT_SIZE } = this.state;
+
+        return {
+            isActive: Math.round(Math.random()) === 0,
+            color,
+            width,
+            height
+        }
+    }
+
+    createRandomLeds(amount) {
+        const leds = [];
+
+        for (let i = 0; i < amount; i++) {
+            leds.push(this.createRandomLed());
+        }
+
+        return leds;
+    }
+
+    createRandomGrid(characters) {
+        const grid = [];
+
+        for (let i = 0; i < characters; i++) {
+            grid[i] = [];
+            for (let k = 0; k < ROWS; k++) {
+                grid[i][k] = this.createRandomLeds(COLS);
+            }
+        }
+
+        return grid;
+    }
 
     createCharacter(character) {
         const grid = [];
         const source = characters[character] || missingno;
-        const { fontSize: width = 20, fontSize: height = 20 } = this.state;
+        const { fontSize: width = FONT_SIZE, fontSize: height = FONT_SIZE } = this.state;
 
         for (let i = 0; i < ROWS; i++) {
             grid[i] = [];
@@ -68,20 +73,37 @@ class App extends React.Component {
         return grid;
     }
 
+    getTime() {
+        const now = new Date();
+        return `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
+    }
+
     constructor() {
+
         super();
 
         const now = new Date();
-
         this.state = {
-            text: `${now.getHours()}:${now.getMinutes()}`,
-            fontSize: 10,
+            text: this.getTime(),
+            fontSize: FONT_SIZE,
         };
+    }
+
+    componentDidMount() {
+        this.interval = window.setInterval(() => {
+            this.setState({
+                text: this.getTime(),
+            });
+        }, DELAY);
+    }
+
+    componentWillUnmount() {
+        window.clearInterval(this.interval);
     }
 
     render() {
         const clock = this.state.text.split('').map(character => this.createCharacter(character));
-        const grid = createRandomGrid(3);
+        const grid = this.createRandomGrid(this.state.text.length);
 
         return (
             <div>
@@ -89,11 +111,6 @@ class App extends React.Component {
                 <p>
                     <label htmlFor="fontSize">font size</label>
                     <input onChange={ () => {this.setState({fontSize: parseInt(this.refs.fontSize.value, 10)})} } id="fontSize" type="text" ref="fontSize" defaultValue={this.state.fontSize} />
-                </p>
-
-                <p>
-                    <label htmlFor="inputText">text</label>
-                    <input onChange={ () => {this.setState({text: this.refs.inputText.value})} }  id="inputText" type="text" ref="inputText" defaultValue={this.state.text} />
                 </p>
 
                 <Grid>
