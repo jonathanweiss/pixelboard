@@ -10,7 +10,7 @@ import {characters, missingno} from './configuration.js';
 const CHARACTERS = 1;
 const ROWS = 14;
 const COLS = 14;
-const DELAY = 100000;
+const DELAY = 1000;
 const FONT_SIZE = 10;
 
 class App extends React.Component {
