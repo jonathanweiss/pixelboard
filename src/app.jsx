@@ -74,8 +74,10 @@ class App extends React.Component {
     }
 
     getTime() {
+        const twoDigits = (val) => val < 10 ? '0' + val : val;
+
         const now = new Date();
-        return `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
+        return `${twoDigits(now.getHours())}:${twoDigits(now.getMinutes())}:${twoDigits(now.getSeconds())}`;
     }
 
     drawGrid(character, index) {
