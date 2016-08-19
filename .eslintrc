@@ -9,6 +9,7 @@ rules:
     ignoreUrls: true,
     ignoreComments: false
   }]
+  arrow-body-style: [0]
 
 parserOptions:
   ecmaFeatures:

@@ -1,11 +1,11 @@
 import React from 'react';
 
 const Character = (props) => {
-    return <div className="character">{props.children}</div>;
+  return <div className="character">{props.children}</div>;
 };
 
 Character.propTypes = {
-    children: React.PropTypes.array,
+  children: React.PropTypes.array,
 };
 
 export default Character;
