@@ -10,7 +10,7 @@ import { characters, missingno } from './configuration.js';
 const ROWS = 14;
 const COLS = 14;
 const DELAY = 1000;
-const FONT_SIZE = 10;
+const FONT_SIZE = 4;
 
 class App extends React.Component {
   constructor() {
@@ -101,7 +101,7 @@ class App extends React.Component {
   }
 
   drawGrid(character, charIndex) {
-    return (<Character key={`character_${charIndex}`}>
+    return (<Character margin={this.state.fontSize} key={`character_${charIndex}`}>
       {character.map((row, rowIndex) => {
         return (<Row key={`row_${rowIndex}`}>{row.map((led, ledIndex) => {
           return <Led key={`led_${ledIndex}`} {...led} />;
