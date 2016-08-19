@@ -78,13 +78,24 @@ class App extends React.Component {
         return `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
     }
 
+    drawGrid(character, index) {
+        return <Character key={`character_${index}`}>
+            {character.map((row, index) => {
+                return <Row key={`row_${index}`}>{row.map((led, index) => {
+                    return <Led key={`led_${index}`} {...led} />
+                })}</Row>
+            })}
+        </Character>
+    }
+
     constructor() {
 
         super();
 
         const now = new Date();
         this.state = {
-            text: this.getTime(),
+            text: '',
+            clock: this.getTime(),
             fontSize: FONT_SIZE,
         };
     }
@@ -92,7 +103,7 @@ class App extends React.Component {
     componentDidMount() {
         this.interval = window.setInterval(() => {
             this.setState({
-                text: this.getTime(),
+                clock: this.getTime(),
             });
         }, DELAY);
     }
@@ -102,8 +113,9 @@ class App extends React.Component {
     }
 
     render() {
-        const clock = this.state.text.split('').map(character => this.createCharacter(character));
-        const grid = this.createRandomGrid(this.state.text.length);
+        const clock = this.state.clock.split('').map(character => this.createCharacter(character));
+        const grid = this.createRandomGrid(this.state.clock.length);
+        const freetext = this.state.text.split('').map(character => this.createCharacter(character));
 
         return (
             <div>
@@ -113,30 +125,17 @@ class App extends React.Component {
                     <input onChange={ () => {this.setState({fontSize: parseInt(this.refs.fontSize.value, 10)})} } id="fontSize" type="text" ref="fontSize" defaultValue={this.state.fontSize} />
                 </p>
 
-                <Grid>
-                    {clock.map((character, index) => {
-                        return <Character key={`character_${index}`}>
-                            {character.map((row, index) => {
-                                return <Row key={`row_${index}`}>{row.map((led, index) => {
-                                    return <Led key={`led_${index}`} {...led} />
-                                })}</Row>
-                            })}
-                        </Character>
-                    })}
-                </Grid>
+                <Grid>{clock.map((character, index) => this.drawGrid(character, index))}</Grid>
 
                 <h2>Random colored pixels</h2>
-                <Grid>
-                    {grid.map((character, index) => {
-                        return <Character key={`character_${index}`}>
-                            {character.map((row, index) => {
-                                return <Row key={`row_${index}`}>{row.map((led, index) => {
-                                    return <Led key={`led_${index}`} {...led} />
-                                })}</Row>
-                            })}
-                        </Character>
-                    })}
-                </Grid>
+                <Grid>{grid.map((character, index) => this.drawGrid(character, index))}</Grid>
+
+                <h2>Free input</h2>
+                <p>
+                    <label htmlFor="text">text</label>
+                    <input onChange={ () => {this.setState({text: this.refs.text.value})} } id="text" type="text" ref="text" defaultValue={this.state.text} />
+                </p>
+                <Grid>{freetext.map((character, index) => this.drawGrid(character, index))}</Grid>
             </div>
 
         );
