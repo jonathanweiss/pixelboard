@@ -1,22 +1,22 @@
+import Radium from 'radium';
 import React from 'react';
-import cn from 'classnames';
+
+const styles = {
+  base: {
+    backgroundColor: 'transparent',
+  },
+};
 
 const Led = (props) => {
-  const classnames = cn({
-    led: true,
-    'is-active': props.isActive,
-  });
+  const { width, height, isActive, color } = props;
 
-  const style = {
-    width: props.width,
-    height: props.height,
+  styles.base.width = width;
+  styles.base.height = height;
+  styles.active = {
+    backgroundColor: `rgba(${color}, 1)`,
   };
 
-  if (props.isActive) {
-    style.backgroundColor = `rgba(${props.color}, 1)`;
-  }
-
-  return <div className={classnames} style={style} />;
+  return <div style={[styles.base, isActive && styles.active]} />;
 };
 
 Led.propTypes = {
@@ -33,4 +33,4 @@ Led.defaultProps = {
   color: '0, 0, 0',
 };
 
-export default Led;
+export default Radium(Led); //eslint-disable-line

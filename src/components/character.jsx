@@ -1,11 +1,19 @@
 import React from 'react';
+import Radium from 'radium';
+
+const styles = {
+  base: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+};
 
 const Character = (props) => {
-  const styles = {
+  styles.margins = {
     marginRight: `${props.margin}px`,
     marginBottom: `${props.margin}px`,
   };
-  return <div className="character" style={styles}>{props.children}</div>;
+  return <div style={[styles.base, styles.margins]}>{props.children}</div>;
 };
 
 Character.propTypes = {
@@ -13,4 +21,4 @@ Character.propTypes = {
   margin: React.PropTypes.number,
 };
 
-export default Character;
+export default Radium(Character); //eslint-disable-line
