@@ -3,6 +3,7 @@ import React from 'react';
 
 const styles = {
   base: {
+    margin: '0 1px 1px 0',
     backgroundColor: 'transparent',
   },
 };

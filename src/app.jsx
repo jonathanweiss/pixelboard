@@ -8,7 +8,7 @@ import Led from './components/led.jsx';
 import { characters, missingno } from './configuration.js';
 
 const ROWS = 14;
-const COLS = 14;
+const columns = 14;
 const DELAY = 1000;
 const FONT_SIZE = 4;
 
@@ -74,7 +74,7 @@ class App extends React.Component {
     for (let i = 0; i < chars; i++) {
       grid[i] = [];
       for (let k = 0; k < ROWS; k++) {
-        grid[i][k] = this.createRandomLeds(COLS);
+        grid[i][k] = this.createRandomLeds(columns);
       }
     }
 
@@ -91,8 +91,8 @@ class App extends React.Component {
       const intVal = source[i];
       let bits = intVal.toString(2);
 
-      bits = ('0'.repeat(COLS - bits.length) + bits).split('');
-      for (let k = 0; k < COLS; k++) {
+      bits = ('0'.repeat(columns - bits.length) + bits).split('');
+      for (let k = 0; k < columns; k++) {
         grid[i][k] = { isActive: bits[k] === '1', width, height };
       }
     }

@@ -16,4 +16,15 @@ const characters = {
 // A wild missingno appears...
 const missingno = [13107, 13107, 3276, 3276, 13107, 13107, 3276, 3276, 13107, 13107, 3276, 3276, 13107, 13107];
 
-export { characters, missingno };
+const rows = 14;
+const columns = 14;
+const defaultSize = 4;
+
+const defaultGrid = {
+  width: 4,
+  height: 4,
+  columns,
+  rows,
+};
+
+export { characters, missingno, rows, columns, defaultSize, defaultGrid };
