@@ -6,7 +6,7 @@ import { defaultGrid } from '../utils/configuration';
 
 const DELAY = 1000;
 
-class App extends React.Component {
+class Clock extends React.Component {
   constructor() {
     super();
 
@@ -42,10 +42,10 @@ class App extends React.Component {
     return (
       <div>
         <h2>Clock</h2>
-        <Grid>{clock.map((character, index) => drawCharacter(character, index, 4))}</Grid>
+        <Grid>{clock.map((character, index) => drawCharacter(character, index))}</Grid>
       </div>
     );
   }
 }
 
-export default App;
+export default Clock;

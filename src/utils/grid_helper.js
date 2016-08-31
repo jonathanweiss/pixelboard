@@ -25,7 +25,7 @@ const getBits = (character, gridConfiguration) => {
   return grid;
 };
 
-const drawCharacter = (character, charIndex, margin) => {
+const drawCharacter = (character, charIndex, margin = 4) => {
   return (
     <Character margin={margin} key={`character_${charIndex}`}>
       {character.map((row, rowIndex) => {
