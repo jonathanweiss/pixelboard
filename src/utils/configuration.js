@@ -18,7 +18,6 @@ const missingno = [13107, 13107, 3276, 3276, 13107, 13107, 3276, 3276, 13107, 13
 
 const rows = 14;
 const columns = 14;
-const defaultSize = 4;
 
 const defaultGrid = {
   width: 4,
@@ -27,4 +26,4 @@ const defaultGrid = {
   rows,
 };
 
-export { characters, missingno, rows, columns, defaultSize, defaultGrid };
+export { characters, missingno, rows, columns, defaultGrid };
