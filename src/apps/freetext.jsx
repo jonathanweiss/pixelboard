@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 import Grid from '../components/grid.jsx';
 import { drawCharacter, getBits } from '../utils/grid_helper';
@@ -26,6 +27,8 @@ class FreeText extends React.Component {
           <input onChange={() => { this.setState({ text: this.refs.text.value }); }} id="text" type="text" ref="text" defaultValue={this.state.text} />
         </p>
         <Grid>{freetext.map((character, index) => drawCharacter(character, index))}</Grid>
+
+        <Link to="/">Back</Link>
       </div>
     );
   }

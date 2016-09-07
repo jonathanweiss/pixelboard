@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 import Grid from '../components/grid.jsx';
 import { drawCharacter } from '../utils/grid_helper';
@@ -59,6 +60,8 @@ class Random extends React.Component {
       <div>
         <h2>Random colored pixels</h2>
         <Grid>{grid.map((character, index) => drawCharacter(character, index))}</Grid>
+
+        <Link to="/">Back</Link>
       </div>
     );
   }

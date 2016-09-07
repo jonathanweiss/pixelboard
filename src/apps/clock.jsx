@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 import Grid from '../components/grid.jsx';
 import { drawCharacter, getBits } from '../utils/grid_helper';
@@ -43,6 +44,8 @@ class Clock extends React.Component {
       <div>
         <h2>Clock</h2>
         <Grid>{clock.map((character, index) => drawCharacter(character, index))}</Grid>
+
+        <Link to="/">Back</Link>
       </div>
     );
   }

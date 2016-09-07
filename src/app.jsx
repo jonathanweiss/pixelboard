@@ -1,15 +1,15 @@
 import React from 'react';
-
-import Clock from './apps/clock.jsx';
-import FreeText from './apps/freetext.jsx';
-import RandomPixels from './apps/random.jsx';
+import { Link } from 'react-router';
 
 const App = () => {
   return (
     <div>
-      <Clock />
-      <FreeText />
-      <RandomPixels />
+      <h1>Pixelboard Demos</h1>
+      <ul>
+        <li><Link to="/clock">Digital Clock</Link></li>
+        <li><Link to="/random">Random Pixels</Link></li>
+        <li><Link to="/freetext">Enter your own digits</Link></li>
+      </ul>
     </div>
   );
 };
