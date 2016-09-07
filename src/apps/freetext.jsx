@@ -24,7 +24,14 @@ class FreeText extends React.Component {
         <h2>Free input</h2>
         <p>
           <label htmlFor="text">text</label>
-          <input onChange={() => { this.setState({ text: this.refs.text.value }); }} id="text" type="text" ref="text" defaultValue={this.state.text} />
+          <input
+            onChange={() => { this.setState({ text: this.refs.text.value }); }}
+            id="text"
+            type="text"
+            ref="text"
+            defaultValue={this.state.text}
+            autoFocus
+          />
         </p>
         <Grid>{freetext.map((character, index) => drawCharacter(character, index))}</Grid>
 
