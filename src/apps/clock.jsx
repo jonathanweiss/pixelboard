@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 
 import Grid from '../components/grid.jsx';
-import { drawCharacter, getBits } from '../utils/grid_helper';
+import { drawColumn, getBits } from '../utils/grid_helper';
 import { defaultGrid } from '../utils/configuration';
 
 const DELAY = 1000;
@@ -43,7 +43,7 @@ class Clock extends React.Component {
     return (
       <div>
         <h2>Clock</h2>
-        <Grid>{clock.map((character, index) => drawCharacter(character, index))}</Grid>
+        <Grid>{clock.map((character, index) => drawColumn(character, index))}</Grid>
 
         <Link to="/">Back</Link>
       </div>

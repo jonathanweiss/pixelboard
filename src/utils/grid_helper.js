@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Character from '../components/character.jsx';
+import Column from '../components/column.jsx';
 import Row from '../components/row.jsx';
 import Led from '../components/led.jsx';
 
@@ -25,16 +25,16 @@ const getBits = (character, gridConfiguration) => {
   return grid;
 };
 
-const drawCharacter = (character, charIndex, margin = 4) => {
+const drawColumn = (column, charIndex, margin = 4) => {
   return (
-    <Character margin={margin} key={`character_${charIndex}`}>
-      {character.map((row, rowIndex) => {
+    <Column margin={margin} key={`column_${charIndex}`}>
+      {column.map((row, rowIndex) => {
         return (<Row key={`row_${rowIndex}`}>{row.map((led, ledIndex) => {
           return <Led key={`led_${ledIndex}`} {...led} />;
         })}</Row>);
       })}
-    </Character>
+    </Column>
   );
 };
 
-export { getBits, drawCharacter };
+export { getBits, drawColumn };

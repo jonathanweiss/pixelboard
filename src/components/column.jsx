@@ -8,7 +8,7 @@ const styles = {
   },
 };
 
-const Character = (props) => {
+const Column = (props) => {
   styles.margins = {
     marginRight: `${props.margin}px`,
     marginBottom: `${props.margin}px`,
@@ -16,9 +16,9 @@ const Character = (props) => {
   return <div style={[styles.base, styles.margins]}>{props.children}</div>;
 };
 
-Character.propTypes = {
+Column.propTypes = {
   children: React.PropTypes.array,
   margin: React.PropTypes.number,
 };
 
-export default Radium(Character); //eslint-disable-line
+export default Radium(Column); //eslint-disable-line

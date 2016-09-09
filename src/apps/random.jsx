@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 
 import Grid from '../components/grid.jsx';
-import { drawCharacter } from '../utils/grid_helper';
+import { drawColumn } from '../utils/grid_helper';
 import { defaultGrid } from '../utils/configuration';
 
 class Random extends React.Component {
@@ -59,7 +59,7 @@ class Random extends React.Component {
     return (
       <div>
         <h2>Random colored pixels</h2>
-        <Grid>{grid.map((character, index) => drawCharacter(character, index))}</Grid>
+        <Grid>{grid.map((character, index) => drawColumn(character, index))}</Grid>
 
         <Link to="/">Back</Link>
       </div>

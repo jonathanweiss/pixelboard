@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 
 import Grid from '../components/grid.jsx';
-import { drawCharacter, getBits } from '../utils/grid_helper';
+import { drawColumn, getBits } from '../utils/grid_helper';
 import { defaultGrid } from '../utils/configuration';
 
 class FreeText extends React.Component {
@@ -33,7 +33,7 @@ class FreeText extends React.Component {
             autoFocus
           />
         </p>
-        <Grid>{freetext.map((character, index) => drawCharacter(character, index))}</Grid>
+        <Grid>{freetext.map((character, index) => drawColumn(character, index))}</Grid>
 
         <Link to="/">Back</Link>
       </div>
