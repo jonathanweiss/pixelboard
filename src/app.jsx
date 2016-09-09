@@ -9,6 +9,7 @@ const App = () => {
         <li><Link to="/clock">Digital Clock</Link></li>
         <li><Link to="/random">Random Pixels</Link></li>
         <li><Link to="/freetext">Enter your own digits</Link></li>
+        <li><Link to="/draw">Draw on the board</Link></li>
       </ul>
     </div>
   );
