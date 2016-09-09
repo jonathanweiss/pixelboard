@@ -9,10 +9,11 @@ const styles = {
 };
 
 const Led = (props) => {
-  const { width, height, isActive, color } = props;
+  const { width, height, isActive, color, backgroundColor } = props;
 
   styles.base.width = width;
   styles.base.height = height;
+  styles.base.backgroundColor = backgroundColor;
   styles.active = {
     backgroundColor: `rgba(${color}, 1)`,
   };
@@ -21,17 +22,19 @@ const Led = (props) => {
 };
 
 Led.propTypes = {
-  width: React.PropTypes.number,
+  backgroundColor: React.PropTypes.string,
+  color: React.PropTypes.string,
   height: React.PropTypes.number,
   isActive: React.PropTypes.bool,
-  color: React.PropTypes.string,
+  width: React.PropTypes.number,
 };
 
 Led.defaultProps = {
-  width: 20,
+  backgroundColor: 'transparent',
+  color: '0, 0, 0',
   height: 20,
   isActive: false,
-  color: '0, 0, 0',
+  width: 20,
 };
 
 export default Radium(Led); //eslint-disable-line
