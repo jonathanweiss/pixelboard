@@ -10,6 +10,7 @@ import { rows, columns } from '../utils/configuration';
 
 const numberStyles = {
   base: {
+    userSelect: 'none',
     textAlign: 'right',
     display: 'inline-block',
     fontFamily: 'Consolas, Inconsolata, Andale Mono, Monaco, Courier New, Courier',
@@ -17,10 +18,29 @@ const numberStyles = {
 };
 
 class Draw extends React.Component {
-
   constructor() {
     super();
+
+    this.mouseDown = false;
     this.state = { board: this.createEmptyBoard() };
+
+    this.onMouseDown = () => {
+      this.mouseDown = true;
+    };
+
+    this.onMouseUp = () => {
+      this.mouseDown = false;
+    };
+  }
+
+  componentDidMount() {
+    window.addEventListener('mousedown', this.onMouseDown);
+    window.addEventListener('mouseup', this.onMouseUp);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('mousedown', this.onMouseDown);
+    window.removeEventListener('mouseup', this.onMouseUp);
   }
 
   toggleLed(col, row, led) {
@@ -85,7 +105,8 @@ class Draw extends React.Component {
                   return (
                     <div
                       key={`led_${ledIndex}`}
-                      onClick={() => { this.toggleLed(columnIndex, rowIndex, ledIndex); }}
+                      onMouseEnter={() => { if (this.mouseDown) this.toggleLed(columnIndex, rowIndex, ledIndex); }}
+                      onMouseDown={() => { this.toggleLed(columnIndex, rowIndex, ledIndex); }}
                     ><Led {...led} /></div>
                   );
                 })}
