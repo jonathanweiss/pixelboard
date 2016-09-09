@@ -13,38 +13,39 @@ module.exports = {
   entry: path.resolve(dirJS, 'index.js'),
   output: {
     path: dirBuild,
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   devServer: {
-    contentBase: dirBuild
+    contentBase: dirBuild,
+    historyApiFallback: true
   },
   module: {
     loaders: [
       {
         loader: 'react-hot',
-        test: dirJS
+        test: dirJS,
       },
       {
         loader: 'babel-loader',
         test: dirJS,
         query: {
-          presets: ['es2015', 'stage-0', 'react']
-        }
-      }
-    ]
+          presets: ['es2015', 'stage-0', 'react'],
+        },
+      },
+    ],
   },
   plugins: [
     // Simply copies the files over
     new CopyWebpackPlugin([
-        { from: dirHtml } // to: output.path
+        { from: dirHtml }, // to: output.path
     ]),
     // Avoid publishing files when compilation fails
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
   ],
   stats: {
     // Nice colored output
-    colors: true
+    colors: true,
   },
   // Create Sourcemaps for the bundle
-  devtool: 'source-map'
+  devtool: 'source-map',
 };
