@@ -5,7 +5,7 @@ import Grid from '../components/grid.jsx';
 import { drawColumn, getBits } from '../utils/grid_helper';
 import { defaultGrid } from '../utils/configuration';
 
-const DELAY = 1000;
+const DELAY = 500;
 
 class Clock extends React.Component {
   constructor() {
@@ -16,19 +16,19 @@ class Clock extends React.Component {
     };
   }
 
-  getTime() {
-    const twoDigits = (val) => { return val < 10 ? `0${val}` : val; };
-
-    const now = new Date();
-    return `${twoDigits(now.getHours())}:${twoDigits(now.getMinutes())}:${twoDigits(now.getSeconds())}`;
-  }
-
   componentDidMount() {
     this.updateTime();
   }
 
   componentWillUnmount() {
     window.clearInterval(this.timeout);
+  }
+
+  getTime() {
+    const twoDigits = (val) => { return val < 10 ? `0${val}` : val; };
+
+    const now = new Date();
+    return `${twoDigits(now.getHours())}:${twoDigits(now.getMinutes())}:${twoDigits(now.getSeconds())}`;
   }
 
   updateTime() {
