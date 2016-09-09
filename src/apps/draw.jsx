@@ -8,6 +8,14 @@ import Led from '../components/led.jsx';
 
 import { rows, columns } from '../utils/configuration';
 
+const numberStyles = {
+  base: {
+    textAlign: 'right',
+    display: 'inline-block',
+    fontFamily: 'Consolas, Inconsolata, Andale Mono, Monaco, Courier New, Courier',
+  },
+};
+
 class Draw extends React.Component {
 
   constructor() {
@@ -43,23 +51,44 @@ class Draw extends React.Component {
 
   render() {
     const { board } = this.state;
+    const charValue = [];
     return (
       <div>
         <h2>Draw as you like!</h2>
         <Grid>{board.map((column, columnIndex) => {
           return (<Column key={`column_${columnIndex}`}>
             {column.map((row, rowIndex) => {
-              return (<Row key={`row_${rowIndex}`}>{row.map((led, ledIndex) => {
-                return (
-                  <div
-                    key={`led_${ledIndex}`}
-                    onClick={() => { this.toggleLed(columnIndex, rowIndex, ledIndex); }}
-                  ><Led {...led} /></div>
-                );
-              })}</Row>);
+              let decimalValue = 0;
+              let binaryValue;
+
+              const rowComponent = (
+                <Row key={`row_${rowIndex}`}>{row.map((led, ledIndex) => {
+                  if (led.isActive) {
+                    decimalValue += Math.pow(2, ledIndex);
+                  }
+
+                  binaryValue = decimalValue.toString(2);
+                  return (
+                    <div
+                      key={`led_${ledIndex}`}
+                      onClick={() => { this.toggleLed(columnIndex, rowIndex, ledIndex); }}
+                    ><Led {...led} /></div>
+                  );
+                })}
+                  <div>
+                    <span style={numberStyles.base}>{'0'.repeat(columns - binaryValue.length) + binaryValue}</span>
+                    &mdash;
+                    <span style={numberStyles.base}>{decimalValue}</span>
+                  </div>
+                </Row>
+              );
+
+              charValue.push(decimalValue);
+              return rowComponent;
             })}
           </Column>);
         })}</Grid>
+        <p>This picture will be stored as: [{charValue.join(', ')}]</p>
 
         <Link to="/">Back</Link>
       </div>
