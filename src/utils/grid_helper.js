@@ -25,9 +25,9 @@ const getBits = (character, gridConfiguration) => {
   return grid;
 };
 
-const drawColumn = (column, charIndex, margin = 4) => {
+const drawColumn = (column, colIndex, margin = 4) => {
   return (
-    <Column margin={margin} key={`column_${charIndex}`}>
+    <Column margin={margin} key={`column_${colIndex}`}>
       {column.map((row, rowIndex) => {
         return (<Row key={`row_${rowIndex}`}>{row.map((led, ledIndex) => {
           return <Led key={`led_${ledIndex}`} {...led} />;
