@@ -13,7 +13,6 @@ const Column = (props) => {
     marginRight: `${props.margin}px`,
     marginBottom: `${props.margin}px`,
   };
-  console.log(props)
   return <div style={[styles.base, styles.margins]}>{props.children}</div>;
 };
 

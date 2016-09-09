@@ -103,7 +103,7 @@ class Draw extends React.Component {
           </Column>);
         })}</Grid>
         <p>This picture will be stored as: [{charValue.join(', ')}]</p>
-        <button onClick={() => { this.invertBoard() }}>Invert board</button>
+        <button onClick={() => { this.invertBoard(); }}>Invert board</button>
 
         <p>
           <Link to="/">Back</Link>
