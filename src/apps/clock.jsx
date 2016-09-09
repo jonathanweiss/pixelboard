@@ -16,23 +16,29 @@ class Clock extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this.interval = window.setInterval(() => {
-      this.setState({
-        clock: this.getTime(),
-      });
-    }, DELAY);
-  }
-
-  componentWillUnmount() {
-    window.clearInterval(this.interval);
-  }
-
   getTime() {
     const twoDigits = (val) => { return val < 10 ? `0${val}` : val; };
 
     const now = new Date();
     return `${twoDigits(now.getHours())}:${twoDigits(now.getMinutes())}:${twoDigits(now.getSeconds())}`;
+  }
+
+  componentDidMount() {
+    this.updateTime();
+  }
+
+  componentWillUnmount() {
+    window.clearInterval(this.timeout);
+  }
+
+  updateTime() {
+    this.setState({
+      clock: this.getTime(),
+    });
+
+    this.timeout = window.setTimeout(() => {
+      this.updateTime();
+    }, DELAY);
   }
 
   render() {
