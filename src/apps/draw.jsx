@@ -65,6 +65,10 @@ class Draw extends React.Component {
     this.setState({ board });
   }
 
+  clearBoard() {
+    this.setState({ board: this.createEmptyBoard() });
+  }
+
   createEmptyBoard() {
     const board = [[]];
     for (let i = 0; i < rows; i++) {
@@ -125,6 +129,7 @@ class Draw extends React.Component {
         })}</Grid>
         <p>This picture will be stored as: [{charValue.join(', ')}]</p>
         <button onClick={() => { this.invertBoard(); }}>Invert board</button>
+        <button onClick={() => { this.clearBoard(); }}>Clear board</button>
 
         <p>
           <Link to="/">Back</Link>
