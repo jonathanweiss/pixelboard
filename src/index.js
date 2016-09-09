@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, browserHistory } from 'react-router';
+import { Router, Route, hashHistory } from 'react-router';
 
 import App from './app.jsx';
 
@@ -10,7 +10,7 @@ import RandomPixels from './apps/random.jsx';
 import Draw from './apps/draw.jsx';
 
 ReactDOM.render(
-  <Router history={browserHistory}>
+  <Router history={hashHistory}>
     <Route path="/" component={App} />
     <Route path="/clock" component={Clock} />
     <Route path="/random" component={RandomPixels} />
