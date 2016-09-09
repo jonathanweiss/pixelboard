@@ -6,14 +6,6 @@ import { drawColumn } from '../utils/grid_helper';
 import { defaultGrid } from '../utils/configuration';
 
 class Random extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      text: '',
-    };
-  }
-
   createRandomLed() {
     const color = [
       Math.round(Math.random() * 256),
