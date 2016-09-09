@@ -31,6 +31,20 @@ class Draw extends React.Component {
     this.setState({ board });
   }
 
+  invertBoard() {
+    const board = Object.assign([], this.state.board);
+    const col = 0;
+
+    for (let i = 0; i < rows; i++) {
+      for (let k = 0; k < columns; k++) {
+        const isOn = board[col][i][k].isActive;
+        board[col][i][k].isActive = !isOn;
+      }
+    }
+
+    this.setState({ board });
+  }
+
   createEmptyBoard() {
     const board = [[]];
     for (let i = 0; i < rows; i++) {
@@ -89,8 +103,11 @@ class Draw extends React.Component {
           </Column>);
         })}</Grid>
         <p>This picture will be stored as: [{charValue.join(', ')}]</p>
+        <button onClick={() => { this.invertBoard() }}>Invert board</button>
 
-        <Link to="/">Back</Link>
+        <p>
+          <Link to="/">Back</Link>
+        </p>
       </div>
     );
   }
