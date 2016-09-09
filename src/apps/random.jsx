@@ -16,6 +16,7 @@ class Random extends React.Component {
 
     return {
       isActive: Math.round(Math.random()) === 0,
+      margin: 0,
       color,
       width,
       height,
