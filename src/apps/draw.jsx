@@ -50,7 +50,12 @@ class Draw extends React.Component {
           return (<Column key={`column_${columnIndex}`}>
             {column.map((row, rowIndex) => {
               return (<Row key={`row_${rowIndex}`}>{row.map((led, ledIndex) => {
-                return <div key={`led_${ledIndex}`} onClick={() => { this.toggleLed(columnIndex, rowIndex, ledIndex); }}><Led key={`led_${ledIndex}`} {...led} /></div>;
+                return (
+                  <div
+                    key={`led_${ledIndex}`}
+                    onClick={() => { this.toggleLed(columnIndex, rowIndex, ledIndex); }}
+                  ><Led {...led} /></div>
+                );
               })}</Row>);
             })}
           </Column>);
