@@ -25,6 +25,15 @@ const intValueStyles = {
   },
 };
 
+const pixelProps = {
+  isActive: false,
+  width: 40,
+  height: 40,
+  backgroundColor: '#f5f5f5',
+  color: '0, 143, 0',
+  margin: 2,
+};
+
 class Draw extends React.Component {
   constructor() {
     super();
@@ -84,13 +93,7 @@ class Draw extends React.Component {
     for (let i = 0; i < rows; i++) {
       board[0][i] = [];
       for (let k = 0; k < columns; k++) {
-        board[0][i][k] = {
-          width: 40,
-          height: 40,
-          backgroundColor: '#f5f5f5',
-          color: '0, 143, 0',
-          margin: 2,
-        };
+        board[0][i][k] = { ...pixelProps };
       }
     }
 
@@ -104,11 +107,7 @@ class Draw extends React.Component {
       board[0][i] = [];
       for (let k = 0; k < columns; k++) {
         board[0][i][k] = {
-          width: 40,
-          height: 40,
-          backgroundColor: '#f5f5f5',
-          color: '0, 143, 0',
-          margin: 2,
+          ...pixelProps,
           isActive: bits[i][k].isActive,
         };
       }
