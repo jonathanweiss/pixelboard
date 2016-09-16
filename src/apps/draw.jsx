@@ -133,7 +133,7 @@ class Draw extends React.Component {
           let bits = intVal.toString(2);
           grid[i] = [];
 
-          bits = ('0'.repeat(columns - bits.length) + bits).split('');
+          bits = ('0'.repeat(columns - bits.length) + bits).split('').reverse();
           for (let k = 0; k < columns; k++) {
             grid[i][k] = { isActive: bits[k] === '1' };
           }
@@ -198,7 +198,8 @@ class Draw extends React.Component {
           </Column>);
         })}</Grid>
 
-        <p>This picture will be stored as: <span style={intValueStyles.base}>{charValue.join(', ')}</span></p>
+        <p>This picture will be stored as:</p>
+        <p style={intValueStyles.base}>{charValue.join(', ')}</p>
         <button onClick={() => { this.invertBoard(); }}>Invert board</button>
         <button onClick={() => { this.clearBoard(); }}>Clear board</button>
 
