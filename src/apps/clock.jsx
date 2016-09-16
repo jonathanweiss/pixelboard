@@ -1,17 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router';
+import moment from 'moment';
 
-import Grid from '../components/grid.jsx';
-import Digit from '../components/digit.jsx';
+import Clock from '../components/clock.jsx';
 
 const DELAY = 100;
 
-class Clock extends React.Component {
+class ClockApp extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      clock: this.getTime(),
+      time: new Date(),
     };
   }
 
@@ -23,50 +23,8 @@ class Clock extends React.Component {
     window.clearInterval(this.timeout);
   }
 
-  getTime() {
-    const now = new Date();
-    const digits = [];
-    const lookup = {
-      hours: now.getHours(),
-      minutes: now.getMinutes(),
-      seconds: now.getSeconds(),
-      milliseconds: now.getMilliseconds(),
-    };
-
-    Object.keys(lookup).forEach(key => {
-      const value = lookup[key].toString();
-
-      if (key === 'milliseconds') {
-        if (lookup[key] < 10) {
-          digits.push('0');
-          digits.push('0');
-          digits.push(value);
-        } else if (lookup[key] < 100) {
-          digits.push('0');
-          digits.push(value[0]);
-          digits.push(value[1]);
-        } else {
-          digits.push(value[0]);
-          digits.push(value[1]);
-          digits.push(value[2]);
-        }
-      } else {
-        if (lookup[key] < 10) {
-          digits.push('0');
-          digits.push(value);
-        } else {
-          digits.push(value[0]);
-          digits.push(value[1]);
-        }
-      }
-    });
-    return digits;
-  }
-
   updateTime() {
-    this.setState({
-      clock: this.getTime(),
-    });
+    this.setState({ time: new Date() });
 
     this.timeout = window.setTimeout(() => {
       this.updateTime();
@@ -74,26 +32,20 @@ class Clock extends React.Component {
   }
 
   render() {
-    const digits = this.state.clock;
+    const timeDE = this.state.time;
+    const timeAU = moment(this.state.time).add(8, 'hours').toDate();
+    const timeNZ = moment(this.state.time).add(10, 'hours').toDate();
 
     return (
       <div>
-        <h2 style={{ marginTop: 200 }}>Clock</h2>
+        <h2>Düsseldorf</h2>
+        <Clock time={timeDE} showSeconds showMiliSeconds />
 
-        <Grid>
-          <Digit value={digits[0]} />
-          <Digit value={digits[1]} />
-          <Digit value=":" />
-          <Digit value={digits[2]} />
-          <Digit value={digits[3]} />
-          <Digit value=":" />
-          <Digit value={digits[4]} />
-          <Digit value={digits[5]} />
-          <Digit value=":" />
-          <Digit value={digits[6]} />
-          <Digit value={digits[7]} />
-          <Digit value={digits[8]} />
-        </Grid>
+        <h2>Sydney</h2>
+        <Clock time={timeAU} showSeconds />
+
+        <h2>Auckland</h2>
+        <Clock time={timeNZ} />
 
         <Link to="/">Back</Link>
       </div>
@@ -101,4 +53,4 @@ class Clock extends React.Component {
   }
 }
 
-export default Clock;
+export default ClockApp;
