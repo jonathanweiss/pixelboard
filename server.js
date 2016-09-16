@@ -7,7 +7,7 @@ const PORT = 3000;
 new WebpackDevServer(webpack(config), {
   publicPath: config.output.publicPath,
   hot: true,
-  historyApiFallback: true
+  historyApiFallback: true,
 }).listen(PORT, 'localhost', (err) => {
   if (err) {
     console.log(err); // eslint-disable-line no-console

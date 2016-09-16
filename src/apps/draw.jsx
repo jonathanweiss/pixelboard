@@ -66,7 +66,9 @@ class Draw extends React.Component {
   }
 
   clearBoard() {
-    this.setState({ board: this.createEmptyBoard() });
+    if (confirm('Are you sure?')) { // eslint-disable-line no-alert
+      this.setState({ board: this.createEmptyBoard() });
+    }
   }
 
   createEmptyBoard() {
@@ -114,10 +116,10 @@ class Draw extends React.Component {
                     ><Led {...led} /></div>
                   );
                 })}
-                  <div>
-                    <span style={numberStyles.base}>{'0'.repeat(columns - binaryValue.length) + binaryValue}</span>
+                  <div style={numberStyles.base}>
+                    {'0'.repeat(columns - binaryValue.length) + binaryValue}
                     &mdash;
-                    <span style={numberStyles.base}>{decimalValue}</span>
+                    {decimalValue}
                   </div>
                 </Row>
               );
