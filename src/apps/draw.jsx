@@ -6,7 +6,8 @@ import Column from '../components/column.jsx';
 import Row from '../components/row.jsx';
 import Led from '../components/led.jsx';
 
-import { rows, columns } from '../utils/configuration';
+import { rows, columns, characters, defaultGrid } from '../utils/configuration';
+import { getBits } from '../utils/grid_helper';
 
 const numberStyles = {
   base: {
@@ -89,12 +90,43 @@ class Draw extends React.Component {
     return board;
   }
 
+  displayCharacter(character) {
+    if (confirm('Are you sure?')) { // eslint-disable-line no-alert
+      const board = [[]];
+      const bits = getBits(character, defaultGrid);
+
+      for (let i = 0; i < rows; i++) {
+        board[0][i] = [];
+        for (let k = 0; k < columns; k++) {
+          board[0][i][k] = {
+            width: 40,
+            height: 40,
+            backgroundColor: '#f5f5f5',
+            color: '0, 143, 0',
+            margin: 2,
+            isActive: bits[i][k].isActive,
+          };
+        }
+      }
+
+      this.setState({ board });
+    }
+  }
+
   render() {
     const { board } = this.state;
     const charValue = [];
+
     return (
       <div>
         <h2>Draw as you like!</h2>
+
+        <label htmlFor="selectChar">Load existing character:</label>
+        <select id="selectChar" onChange={event => this.displayCharacter(event.target.value)}>
+          <option></option>
+          {Object.keys(characters).map(key => <option key={key} value={key}>{key}</option>)}
+        </select>
+
         <Grid>{board.map((column, columnIndex) => {
           return (<Column key={`column_${columnIndex}`}>
             {column.map((row, rowIndex) => {
@@ -129,6 +161,7 @@ class Draw extends React.Component {
             })}
           </Column>);
         })}</Grid>
+
         <p>This picture will be stored as: [{charValue.join(', ')}]</p>
         <button onClick={() => { this.invertBoard(); }}>Invert board</button>
         <button onClick={() => { this.clearBoard(); }}>Clear board</button>
