@@ -18,6 +18,13 @@ const numberStyles = {
   },
 };
 
+const intValueStyles = {
+  base: {
+    backgroundColor: '#ecf0c0',
+    fontFamily: 'Consolas, Inconsolata, Andale Mono, Monaco, Courier New, Courier',
+  },
+};
+
 class Draw extends React.Component {
   constructor() {
     super();
@@ -90,26 +97,49 @@ class Draw extends React.Component {
     return board;
   }
 
+  updateBoard(bits) {
+    const board = [[]];
+
+    for (let i = 0; i < rows; i++) {
+      board[0][i] = [];
+      for (let k = 0; k < columns; k++) {
+        board[0][i][k] = {
+          width: 40,
+          height: 40,
+          backgroundColor: '#f5f5f5',
+          color: '0, 143, 0',
+          margin: 2,
+          isActive: bits[i][k].isActive,
+        };
+      }
+    }
+
+    this.setState({ board });
+  }
+
   displayCharacter(character) {
     if (confirm('Are you sure?')) { // eslint-disable-line no-alert
-      const board = [[]];
-      const bits = getBits(character, defaultGrid);
+      this.updateBoard(getBits(character, defaultGrid));
+    }
+  }
 
-      for (let i = 0; i < rows; i++) {
-        board[0][i] = [];
-        for (let k = 0; k < columns; k++) {
-          board[0][i][k] = {
-            width: 40,
-            height: 40,
-            backgroundColor: '#f5f5f5',
-            color: '0, 143, 0',
-            margin: 2,
-            isActive: bits[i][k].isActive,
-          };
-        }
-      }
+  loadFromString(string) {
+    if (confirm('Are you sure?')) { // eslint-disable-line no-alert
+      const grid = [];
 
-      this.setState({ board });
+      string.split(',')
+        .map(value => parseInt(value, 10))
+        .forEach((intVal, i) => {
+          let bits = intVal.toString(2);
+          grid[i] = [];
+
+          bits = ('0'.repeat(columns - bits.length) + bits).split('');
+          for (let k = 0; k < columns; k++) {
+            grid[i][k] = { isActive: bits[k] === '1' };
+          }
+        });
+
+      this.updateBoard(grid);
     }
   }
 
@@ -126,6 +156,12 @@ class Draw extends React.Component {
           <option></option>
           {Object.keys(characters).map(key => <option key={key} value={key}>{key}</option>)}
         </select>
+        <hr />
+
+        <input type="text" defaultValue="" style={{ width: '80%' }} ref="textInput" />
+        <button onClick={() => this.loadFromString(this.refs.textInput.value)}>Load from integer values</button>
+
+        <hr />
 
         <Grid>{board.map((column, columnIndex) => {
           return (<Column key={`column_${columnIndex}`}>
@@ -162,9 +198,11 @@ class Draw extends React.Component {
           </Column>);
         })}</Grid>
 
-        <p>This picture will be stored as: [{charValue.join(', ')}]</p>
+        <p>This picture will be stored as: <span style={intValueStyles.base}>{charValue.join(', ')}</span></p>
         <button onClick={() => { this.invertBoard(); }}>Invert board</button>
         <button onClick={() => { this.clearBoard(); }}>Clear board</button>
+
+        <hr />
 
         <p>
           <Link to="/">Back</Link>
