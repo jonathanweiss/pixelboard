@@ -12,7 +12,7 @@ const Led = (props) => {
       backgroundColor,
     },
     active: {
-      backgroundColor: `rgba(${color}, 1)`,
+      backgroundColor: `${color}`,
     },
   };
 
@@ -31,7 +31,7 @@ Led.propTypes = {
 Led.defaultProps = {
   backgroundColor: 'transparent',
   margin: 1,
-  color: '0, 0, 0',
+  color: '#000000',
   height: 20,
   isActive: false,
   width: 20,

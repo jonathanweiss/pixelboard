@@ -44,21 +44,22 @@ const getDigits = (time) => {
 
 const Clock = (props) => {
   const digits = getDigits(props.time);
+  const { color, backgroundColor } = props;
 
   return (
     <Grid>
-      <Digit value={digits[0]} />
-      <Digit value={digits[1]} />
-      <Digit value=":" />
-      <Digit value={digits[2]} />
-      <Digit value={digits[3]} />
-      {props.showSeconds ? <Digit value=":" /> : null}
-      {props.showSeconds ? <Digit value={digits[4]} /> : null}
-      {props.showSeconds ? <Digit value={digits[5]} /> : null}
-      {props.showMiliSeconds ? <Digit value=":" /> : null}
-      {props.showMiliSeconds ? <Digit value={digits[6]} /> : null}
-      {props.showMiliSeconds ? <Digit value={digits[7]} /> : null}
-      {props.showMiliSeconds ? <Digit value={digits[8]} /> : null}
+      <Digit color={color} backgroundColor={backgroundColor} value={digits[0]} />
+      <Digit color={color} backgroundColor={backgroundColor} value={digits[1]} />
+      <Digit color={color} backgroundColor={backgroundColor} value=":" />
+      <Digit color={color} backgroundColor={backgroundColor} value={digits[2]} />
+      <Digit color={color} backgroundColor={backgroundColor} value={digits[3]} />
+      {props.showSeconds ? <Digit color={color} backgroundColor={backgroundColor} value=":" /> : null}
+      {props.showSeconds ? <Digit color={color} backgroundColor={backgroundColor} value={digits[4]} /> : null}
+      {props.showSeconds ? <Digit color={color} backgroundColor={backgroundColor} value={digits[5]} /> : null}
+      {props.showMiliSeconds ? <Digit color={color} backgroundColor={backgroundColor} value=":" /> : null}
+      {props.showMiliSeconds ? <Digit color={color} backgroundColor={backgroundColor} value={digits[6]} /> : null}
+      {props.showMiliSeconds ? <Digit color={color} backgroundColor={backgroundColor} value={digits[7]} /> : null}
+      {props.showMiliSeconds ? <Digit color={color} backgroundColor={backgroundColor} value={digits[8]} /> : null}
     </Grid>
   );
 };
@@ -67,6 +68,7 @@ Clock.propTypes = {
   time: React.PropTypes.object.isRequired,
   showSeconds: React.PropTypes.bool,
   showMiliSeconds: React.PropTypes.bool,
+  color: React.PropTypes.string,
 };
 
 export default Clock;

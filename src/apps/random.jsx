@@ -11,13 +11,16 @@ class Random extends React.Component {
       Math.round(Math.random() * 256),
       Math.round(Math.random() * 256),
       Math.round(Math.random() * 256),
-    ].join(', ');
+    ]
+    .map(c => c.toString(16))
+    .join('');
+
     const { width, height } = defaultGrid;
 
     return {
       isActive: Math.round(Math.random()) === 0,
       margin: 0,
-      color,
+      color: `#${color}`,
       width,
       height,
     };

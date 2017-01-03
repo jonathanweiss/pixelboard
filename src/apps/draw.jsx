@@ -30,7 +30,7 @@ const pixelProps = {
   width: 40,
   height: 40,
   backgroundColor: '#f5f5f5',
-  color: '0, 143, 0',
+  color: '#008f00',
   margin: 2,
 };
 

@@ -39,13 +39,13 @@ class ClockApp extends React.Component {
     return (
       <div>
         <h2>Düsseldorf</h2>
-        <Clock time={timeDE} showSeconds showMiliSeconds />
+        <Clock time={timeDE} color="darkred" showSeconds showMiliSeconds />
 
         <h2>Sydney</h2>
         <Clock time={timeAU} showSeconds />
 
         <h2>Auckland</h2>
-        <Clock time={timeNZ} />
+        <Clock time={timeNZ} color="darkgreen" />
 
         <Link to="/">Back</Link>
       </div>

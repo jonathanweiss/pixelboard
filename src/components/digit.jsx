@@ -13,14 +13,14 @@ class Digit extends React.Component {
   }
 
   render() {
-    const { value, margin } = this.props;
+    const { value, margin, color, backgroundColor } = this.props;
     const bits = getBits(value, defaultGrid);
 
     return (
       <Column margin={margin}>
         {bits.map((row, rowIndex) => {
           return (<Row key={`row_${rowIndex}`}>{row.map((led, ledIndex) => {
-            return <Led key={`led_${ledIndex}`} {...led} />;
+            return <Led key={`led_${ledIndex}`} {...led} color={color} backgroundColor={backgroundColor} />;
           })}</Row>);
         })}
       </Column>
@@ -31,6 +31,8 @@ class Digit extends React.Component {
 Digit.propTypes = {
   margin: React.PropTypes.number,
   value: React.PropTypes.string,
+  backgroundColor: React.PropTypes.string,
+  color: React.PropTypes.string,
 };
 
 Digit.defaultProps = {
